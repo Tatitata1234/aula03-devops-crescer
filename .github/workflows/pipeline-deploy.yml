@@ -24,6 +24,31 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Compilação
-        run: mvn -8 compile --file pom.xml
+        run: mvn -B compile --file pom.xml
+  code-quality:
+    name: Qualidade de Código
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: action/checkout@v3
+      - name: Adiciona permissão para mvnw
+        run: chmod +x mvnw
+      - name: Análise SonarCloud
+        run: ./mvnw verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=lab-devops-project
+        env:
+          SONAR_TOKEN: $({ secrets.SONAR_TOKEN })
+          
+ # sec-tests:
+  #  name: Análise de Segurança
+   # needs: build
+    #runs-on: ubuntu-latest
+    
+   # - name: Simular execução de testes de segurança
+    #  run: echo Teststes de segurança executados com sucesso
+      
+      
+      
+
           
       
