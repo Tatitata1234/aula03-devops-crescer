@@ -186,7 +186,7 @@ jobs:
         username: ${{ secrets.HEROKU_EMAIL }}
         password: ${{ secrets.HEROKU_API_KEY }}
     - name: Publicação
-      run: heroku container:release -a app-teste-crescer-devops-thais
+      run: heroku container:release -a app-teste-crescer-devops-thais web
       env:
         heroku_email: ${{ secrets.HEROKU_EMAIL }}
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
