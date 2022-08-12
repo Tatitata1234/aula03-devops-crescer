@@ -171,7 +171,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: registry.heroku.com/app-teste-praquemficou/web:latest
+        tags: registry.heroku.com/app-teste-crescer-devops-thais/web:latest
 
   deploy:
     name: Publica ambiente Desenvolvimento
@@ -186,7 +186,7 @@ jobs:
         username: ${{ secrets.HEROKU_EMAIL }}
         password: ${{ secrets.HEROKU_API_KEY }}
     - name: Publicação
-      run: heroku container:release -a app-teste-praquemficou
+      run: heroku container:release -a app-teste-crescer-devops-thais
       env:
         HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
