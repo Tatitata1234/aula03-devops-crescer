@@ -76,6 +76,22 @@ jobs:
           tags: registry.heroku.com/app-teste-crescer-devops-thais/web:latest
 
 
-    
+  publicacao:
+    name: Publicação do ambiente de desenvolvimento
+    needs: image-heroku
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login no Heroku
+        uses: docker/login-action@v2
+        with:
+          registry: registry.heroku.com
+          username: ${{ secrets.HEROKU_EMAIL }}
+          password: ${{ secrets.HEROKU_API_KEY }}
+      - name: Publicação
+        run: heroku container:release -a NOME_SUA_APLICACAO_HEROKU web 
+        env:
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
 
       
